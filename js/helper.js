@@ -69,6 +69,7 @@ $(document).ready(function() {
   });
 });
 
+
 /*
 The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
 */

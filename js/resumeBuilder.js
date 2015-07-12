@@ -1,6 +1,6 @@
 // create biography object
 var bio = {
-	"name": "Karina Zhou",
+	"name": "karina zhou",
 	"role": "New Graduate",
 	"biopic": "images/me.jpg",
 	"welcomeMSG": "Quick learner and proactive team player with very good communication, technical and analytical skills.",
@@ -174,6 +174,22 @@ function displayWork(){
 }
 
 displayWork();
+
+// name game
+$("#main").append(internationalizeButton);
+
+function inName(){
+  var nameStr = bio.name;
+  var space = ' ';
+  var arrayStr = nameStr.split(space);
+  arrayStr[0] = arrayStr[0].slice(0, 1).toUpperCase() +
+  	arrayStr[0].slice(1).toLowerCase();
+  arrayStr[1] = arrayStr[1].toUpperCase();
+
+  var newnameStr = arrayStr[0] + ' ' + arrayStr[1];
+
+  return newnameStr;
+}
 
 
 
