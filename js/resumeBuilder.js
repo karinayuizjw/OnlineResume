@@ -1,4 +1,3 @@
-
 // create biography object
 var bio = {
 	"name": "Karina Zhou",
@@ -131,6 +130,7 @@ $("#topContacts").append(realEmail);
 $("#topContacts").append(realGitHub);
 $("#topContacts").append(realLocation);
 
+// put name and role ahead of contacts
 $("#header").prepend(realRole);
 $("#header").prepend(realName);
 
@@ -154,22 +154,27 @@ if (bio.skills.length > 0){
 }
 
 // format and append work section
-for (job in work.jobs){
-	$("#workExperience").append(HTMLworkStart);
-	var realEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-	var realTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-	var realEmployerTitle = realEmployer + realTitle;
-	$(".work-entry:last").append(realEmployerTitle);
+function displayWork(){
+	for (job in work.jobs){
+		$("#workExperience").append(HTMLworkStart);
+		var realEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		var realTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		var realEmployerTitle = realEmployer + realTitle;
+		$(".work-entry:last").append(realEmployerTitle);
 
-	var realWorkDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-	$(".work-entry:last").append(realWorkDates);
+		var realWorkDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+		$(".work-entry:last").append(realWorkDates);
 
-	var realWorkLocate = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-	$(".work-entry:last").append(realWorkLocate);
+		var realWorkLocate = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+		$(".work-entry:last").append(realWorkLocate);
 
-	var realWorkDescrip = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-	$(".work-entry:last").append(realWorkDescrip);
-
-
-
+		var realWorkDescrip = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+		$(".work-entry:last").append(realWorkDescrip);
+	}
 }
+
+displayWork();
+
+
+
+
