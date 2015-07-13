@@ -20,7 +20,7 @@ var work = {
 	"jobs": [
 		{
 			"employer": "Experimental Robotics Laboratory, Simon Fraser University",
-			"title": "Research Assistant",
+			"title": "Research Assistant (Part-time)",
 			"location": "Burnaby, BC, Canada",
 			"dates": "Sep.2011 - Feb.2015",
 			"description": "Expanded the methods used for marker-less surgical instrument tracking to enable more complex laparoscopic surgical scene processing.Pioneered 2D feature-based region matching (e.g. SIFT, SURF, ORB) in our lab for surgical and medical education.",
@@ -28,7 +28,7 @@ var work = {
 		},
 		{
 			"employer": "School of Engineering Science, Simon Fraser University",
-			"title": "Teaching Assistant",
+			"title": "Teaching Assistant (Part-time)",
 			"location": "Burnaby, BC, Canada",
 			"dates": "Sep.2012 - Apr.2014",
 			"description": "Course: Mechanical Design, Computer Aided Design, Image Processing and Analysis. Helped students by holding office hours. Assisted grading homework and reports.",
@@ -36,7 +36,7 @@ var work = {
 		},
 		{
 			"employer": "School of Biomedical Engineering, Shanghai Jiao Tong University",
-			"title": "Research Assistant",
+			"title": "Research Assistant (Part-time)",
 			"location": "Shanghai, China",
 			"dates": "Sep.2008 - Mar.2011",
 			"description": "Implemented breast boundary segmentation in MR image for breast volume measurement. Realized MR image registration using local anisotropic structure and joint salience map.",
@@ -83,33 +83,57 @@ var education = {
 }
 
 var project = {
-	"projects": [
+	"projs": [
 		{
 			// project_1
-			"title": "project_1",
-			"dates": "project_1 time",
-			"description": "project_1 description",
-			"images": ["img1_url_1", "img1_url_2"],
+			"title": "Project 1: Visual Tracking in Endoscopic Environment using Gaussian Type and Non-Gaussian Type Approaches",
+			"dates": "Sep.2011 - Apr.2014",
+			"description": "This objective of this project is to effectively track the surgical instrument in the view of a mono endoscope. Both Gaussian and Non-Gaussian type tracking methods are experimented. These methods include the standard Kalman FIlter (KF), extended Kalman Filter (EKF), adaptive Gaussian Mixture Model (AGMM), Particle Filter (PF), and a hybrid approach (PF+AGMM). The tracking results are evaluated in both in-vitro and in-vivo environments.",
 			"demo video url": "youtube_url1",
 			"images": [
-				"images/TBAimg_p1_1.jpg",
-				"images/TBAimg_p1_2.jpg",
-				"images/TBAimg_p1_3.jpg"
+				"images/PFtracking001.jpg",
+				"images/PFtracking002.jpg",
+				"images/PFtracking003.jpg"
 			],
 		},
 		{
 			// project_2
-			"title": "project_2",
-			"dates": "project_2 time",
-			"description": "project_2 description",
-			"images": ["img2_url_1", "img2_url_2"],
+			"title": "Project 2: Interactive Marker-based Mobile Augmented Reality Study",
+			"dates": "Feb.2013 - Aug.2013",
+			"description": "A basic marker-based AR system is built on BlackBerry Playbook in QNX Momentics IDE. Once the camera catches the marker, virtual objects will show in the camera scene and change its orientation when camera view changes. Edge and corner detectors are applied for marker extraction. OpenGL ES is responsible for virtual object rendering.",
 			"demo video url": "youtube_url2",
 			"images": [
-				"images/TBAimg_p2_1.jpg",
-				"images/TBAimg_p2_2.jpg",
-				"images/TBAimg_p2_2.jpg"
+				"images/markerARflowchart.png",
+				"images/markerARdemo1.png",
+				"images/markerARdemo2.png"
 			],
-		}
+		},
+		{
+			// project_3
+			"title": "Project 3: 2D Feature-based Region Matching in Surgical and Medical Education",
+			"dates": "Jan.2014 - Jul.2014",
+			"description": "In this project, the same region in various images are matched by applying feature extraction and description. A user-defined region mask is introduced to speed the matching procedure. Three feature-based region matching methods based on SIFT, SURF and ORB descriptors are proposed. All the methods are evaluated in emulated and surgical scenes involving different viewing conditions.",
+			"demo video url": "youtube_url2",
+			"images": [
+				"images/MaskRegionScr.png",
+				"images/MaskRegionDst.png",
+				"images/MaskRegionMatching.png"
+			],
+		},
+		{
+			// project_4
+			"title": "Project 4: Preliminary Studies of Region-based AR Implementation",
+			"dates": "Apr.2014 - Feb.2015",
+			"description": "A basic region-based AR system is set up on a desk-top platform, offline. This system consists of user-defined region matching and 3D virtual object rendering. The matching model is based on the feature-based region methods (SIFT, SURF and ORB). OpenGL is responsible for the 3D virtual object rendering. When the view changes, the AR effect can be updated accordingly.",
+			"demo video url": "youtube_url2",
+			"images": [
+				"images/ARdemo1.png",
+				"images/ARdemo2.png",
+				"images/ARdemo3.png",
+				"images/ARdemo4.png"
+			],
+		},
+
 	]
 
 }
@@ -176,7 +200,7 @@ function displayWork(){
 displayWork();
 
 // name game
-$("#main").append(internationalizeButton);
+//$("#main").append(internationalizeButton);
 
 function inName(){
   var nameStr = bio.name;
@@ -191,6 +215,42 @@ function inName(){
   return newnameStr;
 }
 
+// format and append projects section
+project.display = function(){
+	for (proj in project.projs){
+		$("#projects").append(HTMLprojectStart);
+		var singleProj = project.projs[proj];
+		var realProjTitle = HTMLprojectTitle.replace("%data%", singleProj.title);
+		$(".project-entry:last").append(realProjTitle);
+
+		var realProjDates = HTMLprojectDates.replace("%data%", singleProj.dates);
+		$(".project-entry:last").append(realProjDates);
+
+		var realProjDescrip = HTMLprojectDescription.replace("%data%", singleProj.description);
+		$(".project-entry:last").append(realProjDescrip);
+
+		if (singleProj.images.length > 0){
+			for (image in singleProj.images){
+				// show images for each project
+				var realImg = HTMLprojectImage.replace("%data%", singleProj.images[image]);
+				$(".project-entry:last").append(realImg);
+			}
+		}
+
+	}
+}
+
+if (project.projs.length > 0){
+	project.display();
+}
+
+// format and append education section
 
 
+
+
+
+
+// add googleMap
+// $("#mapDiv").append(googleMap);
 
