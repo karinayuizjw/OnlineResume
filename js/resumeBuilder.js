@@ -187,42 +187,45 @@ bio.display = function(){
 
 // format and append work section
 work.display = function(){
-	for (job in work.jobs){
+	var len = work.jobs.length;
+	for (var i = 0; i<len; i++){
+		var job = work.jobs[i];
 		$('#workExperience').append(HTMLworkStart);
-		var realEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
-		var realTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
+		var realEmployer = HTMLworkEmployer.replace('%data%', job.employer);
+		var realTitle = HTMLworkTitle.replace('%data%', job.title);
 		var realEmployerTitle = realEmployer + realTitle;
 		$('.work-entry:last').append(realEmployerTitle);
 
-		var realWorkDates = HTMLworkDates.replace('%data%', work.jobs[job].dates);
+		var realWorkDates = HTMLworkDates.replace('%data%', job.dates);
 		$('.work-entry:last').append(realWorkDates);
 
-		var realWorkLocate = HTMLworkLocation.replace('%data%', work.jobs[job].location);
+		var realWorkLocate = HTMLworkLocation.replace('%data%', job.location);
 		$('.work-entry:last').append(realWorkLocate);
 
-		var realWorkDescrip = HTMLworkDescription.replace('%data%', work.jobs[job].description);
+		var realWorkDescrip = HTMLworkDescription.replace('%data%', job.description);
 		$('.work-entry:last').append(realWorkDescrip);
 	}
 }
 
 // format and append projects section
 projects.display = function(){
-	for (proj in projects.projects){
+	var len = projects.projects.length;
+	for (var i = 0; i<len; i++){
+		var project = projects.projects[i];
 		$('#projects').append(HTMLprojectStart);
-		var singleProj = projects.projects[proj];
-		var realProjTitle = HTMLprojectTitle.replace('%data%', singleProj.title);
+		var realProjTitle = HTMLprojectTitle.replace('%data%', project.title);
 		$('.project-entry:last').append(realProjTitle);
 
-		var realProjDates = HTMLprojectDates.replace('%data%', singleProj.dates);
+		var realProjDates = HTMLprojectDates.replace('%data%', project.dates);
 		$('.project-entry:last').append(realProjDates);
 
-		var realProjDescrip = HTMLprojectDescription.replace('%data%', singleProj.description);
+		var realProjDescrip = HTMLprojectDescription.replace('%data%', project.description);
 		$('.project-entry:last').append(realProjDescrip);
 
-		if (singleProj.images.length > 0){
-			for (image in singleProj.images){
+		if (project.images.length > 0){
+			for (image in project.images){
 				// show images for each project
-				var realImg = HTMLprojectImage.replace('%data%', singleProj.images[image]);
+				var realImg = HTMLprojectImage.replace('%data%', project.images[image]);
 				$('.project-entry:last').append(realImg);
 			}
 		}
