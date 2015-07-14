@@ -122,6 +122,10 @@ a {
 .light-blue {
   background-color: #0283BB;
 }
+
+.blue-text {
+  color: #0283BB;
+}
 /* TODO: Replace with image later */
 #header {
   /*background-color: #484848;*/
@@ -188,6 +192,7 @@ img {
 .nav__item {
   box-sizing: border-box;
   font-weight: bold;
+  font-size: 40px;
   display: inline-block;
   width: 24%;
   text-align: center;

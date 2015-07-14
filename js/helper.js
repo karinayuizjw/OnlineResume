@@ -110,7 +110,7 @@ function initializeMap() {
 
   var mapOptions = {
     disableDefaultUI: true,
-    zoom: 8 // KZ
+    zoom: 4 // KZ
   };
 
   // This next line makes `map` a new Google Map JavaScript Object and attaches it to
