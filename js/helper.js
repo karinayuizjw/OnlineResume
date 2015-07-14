@@ -40,7 +40,7 @@ var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+var HTMLprojectImage = '<img src="%data%" class="proj-img center-content">';// KZ edited
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
@@ -109,7 +109,8 @@ function initializeMap() {
   var locations;
 
   var mapOptions = {
-    disableDefaultUI: true
+    disableDefaultUI: true,
+    zoom: 8 // KZ
   };
 
   // This next line makes `map` a new Google Map JavaScript Object and attaches it to
@@ -141,7 +142,18 @@ function initializeMap() {
       locations.push(work.jobs[job].location);
     }
 
-    return locations;
+    // remove duplicates from locations KZ
+    var uniqueLocations = [];
+    var len = locations.length;
+    for (var i = 0; i<len; i++){
+      var curr = locations[i];
+      var currIndex = uniqueLocations.indexOf(curr);
+      if (currIndex < 0){
+        uniqueLocations.push(curr);
+      }
+    }
+
+    return uniqueLocations;
   }
 
   /*
@@ -161,6 +173,8 @@ function initializeMap() {
     var marker = new google.maps.Marker({
       map: map,
       position: placeData.geometry.location,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
       title: name
     });
 
@@ -174,6 +188,14 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
+
+      // marker animation
+      if (marker.getAnimation() != null){
+        marker.setAnimation(null);
+      }else{
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
     });
 
     // this is where the pin actually gets added to the map.

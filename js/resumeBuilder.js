@@ -63,7 +63,7 @@ var education = {
 		},
 		{
 			'name': 'Simon Fraser University',
-			'location': 'Burnaby, BC, CA',
+			'location': 'Burnaby, BC, Canada',
 			'degree': 'Master of Applied Science',
 			'major': ['Engineering Science'],
 			'dates': 2014,
@@ -95,9 +95,8 @@ var projects = {
 			'description': 'This objective of this project is to effectively track the surgical instrument in the view of a mono endoscope. Both Gaussian and Non-Gaussian type tracking methods are experimented. These methods include the standard Kalman FIlter (KF), extended Kalman Filter (EKF), adaptive Gaussian Mixture Model (AGMM), Particle Filter (PF), and a hybrid approach (PF+AGMM). The tracking results are evaluated in both in-vitro and in-vivo environments.',
 			'images': [
 				'images/PFtracking001.jpg',
-				'images/PFtracking002.jpg',
-				'images/PFtracking003.jpg'
-			],
+				'images/PFtracking002.jpg'
+			]
 		},
 		{
 			// project_2
@@ -105,33 +104,21 @@ var projects = {
 			'dates': 'Feb.2013 - Aug.2013',
 			'description': 'A basic marker-based AR system is built on BlackBerry Playbook in QNX Momentics IDE. Once the camera catches the marker, virtual objects will show in the camera scene and change its orientation when camera view changes. Edge and corner detectors are applied for marker extraction. OpenGL ES is responsible for virtual object rendering.',
 			'images': [
-				'images/markerARflowchart.png',
 				'images/markerARdemo1.png',
 				'images/markerARdemo2.png'
-			],
-		},
-		{
-			// project_3
-			'title': 'Project 3: 2D Feature-based Region Matching in Surgical and Medical Education',
-			'dates': 'Jan.2014 - Jul.2014',
-			'description': 'In this project, the same region in various images are matched by applying feature extraction and description. A user-defined region mask is introduced to speed the matching procedure. Three feature-based region matching methods based on SIFT, SURF and ORB descriptors are proposed. All the methods are evaluated in emulated and surgical scenes involving different viewing conditions.',
-			'images': [
-				'images/MaskRegionScr.png',
-				'images/MaskRegionDst.png',
-				'images/MaskRegionMatching.png'
-			],
+			]
 		},
 		{
 			// project_4
-			'title': 'Project 4: Preliminary Studies of Region-based AR Implementation',
-			'dates': 'Apr.2014 - Feb.2015',
+			'title': 'Project 3: Preliminary Studies of Region-based AR Implementation',
+			'dates': 'Jan.2014 - Feb.2015',
 			'description': 'A basic region-based AR system is set up on a desk-top platform, offline. This system consists of user-defined region matching and 3D virtual object rendering. The matching model is based on the feature-based region methods (SIFT, SURF and ORB). OpenGL is responsible for the 3D virtual object rendering. When the view changes, the AR effect can be updated accordingly.',
 			'images': [
 				'images/ARdemo1.png',
 				'images/ARdemo2.png',
 				'images/ARdemo3.png',
 				'images/ARdemo4.png'
-			],
+			]
 		},
 
 	]
@@ -171,8 +158,9 @@ bio.display = function(){
 	if (bio.skills.length > 0){
 		$('#header').append(HTMLskillsStart);
 
-		for (skill in bio.skills){
-			var realSkill = HTMLskills.replace('%data%', bio.skills[skill]);
+		var len = bio.skills.length;
+		for (var i = 0; i<len; i++){
+			var realSkill = HTMLskills.replace('%data%', bio.skills[i]);
 			$('#skills').append(realSkill);
 		}
 	}
@@ -236,13 +224,14 @@ projects.display = function(){
 // format and append education section
 education.display = function(){
 	if (education.schools.length > 0){
-		var len = education.schools.length;
-		for (var i = 0; i < len; i++){
+		var lenSchool = education.schools.length;
+		for (var i = 0; i < lenSchool; i++){
 			$('#education').append(HTMLschoolStart);
 			var school = education.schools[i];
 			var realSchoolTitle = HTMLschoolName.replace('%data%', school.name);
 			var realSchoolDegree = HTMLschoolDegree.replace('%data%', school.degree);
 			var realTitleDegree = realSchoolTitle + realSchoolDegree;
+			realTitleDegree = realTitleDegree.replace('#', school.url);
 			$('.education-entry:last').append(realTitleDegree);
 
 			var realSchoolLoc = HTMLschoolLocation.replace('%data%', school.location);
@@ -257,11 +246,11 @@ education.display = function(){
 	}
 
 	if (education.onlineCourses.length > 0){
-		var len = education.onlineCourses.length;
+		var lenCourse = education.onlineCourses.length;
 		$('#education').append(HTMLonlineClasses);
-		for (var i = 0; i<len; i++){
+		for (var j = 0; j<lenCourse; j++){
 			$('#education').append(HTMLschoolStart);
-			var olCourse = education.onlineCourses[i];
+			var olCourse = education.onlineCourses[j];
 			var realOLcourseTitle = HTMLonlineTitle.replace('%data%', olCourse.title);
 			var realOLcourseSchool = HTMLonlineSchool.replace('%data%', olCourse.school);
 			var realOLTItleSchool = realOLcourseTitle + realOLcourseSchool;
@@ -271,6 +260,7 @@ education.display = function(){
 			$('.education-entry:last').append(realOLcourseDates);
 
 			var realOLcourseURL = HTMLonlineURL.replace('%data%', olCourse.url);
+			realOLcourseURL = realOLcourseURL.replace('#', olCourse.url);
 			$('.education-entry:last').append(realOLcourseURL);
 		}
 	}

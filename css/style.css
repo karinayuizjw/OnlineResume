@@ -150,6 +150,12 @@ img {
   padding: 10px;
 }
 
+/*project image setting KZ*/
+.proj-img {
+  width: 40%;
+  display: inline;
+}
+
 /* Bar chart stuff */
 .chart div {
   font: 10px sans-serif;
