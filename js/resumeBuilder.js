@@ -109,7 +109,7 @@ var projects = {
 			]
 		},
 		{
-			// project_4
+			// project_3
 			'title': 'Project 3: Preliminary Studies of Region-based AR Implementation',
 			'dates': 'Jan.2014 - Feb.2015',
 			'description': 'A basic region-based AR system is set up on a desk-top platform, offline. This system consists of user-defined region matching and 3D virtual object rendering. The matching model is based on the feature-based region methods (SIFT, SURF and ORB). OpenGL is responsible for the 3D virtual object rendering. When the view changes, the AR effect can be updated accordingly.',
